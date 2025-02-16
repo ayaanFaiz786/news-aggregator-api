@@ -1,0 +1,47 @@
+
+services:
+  app:
+    image: php:8.1-fpm
+    container_name: news-aggregator-api
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    networks:
+      - laravel
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginx-server
+    ports:
+      - "81:80"
+    volumes:
+      - ./:/var/www
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - laravel
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: news_aggregator_api
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - laravel
+
+volumes:
+  mysql-data:
+
+networks:
+  laravel:
+    driver: bridge
