@@ -37,6 +37,8 @@ class ArticleRepository implements ArticleInterface
 
     private function filterByDate($query, $date)
     {
+        // format date to yyyy-mm-dd
+        $date = date('y-m-d', strtotime($date));
         return $query->whereDate('published_at', $date);
     }
 
@@ -66,7 +68,7 @@ class ArticleRepository implements ArticleInterface
 
     public function getArticleById($id)
     {
-        return Article::findOrFail($id);
+        return Article::find($id);
     }
 
     public function insertArticles(array $data)

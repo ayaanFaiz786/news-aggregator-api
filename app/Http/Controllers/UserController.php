@@ -35,14 +35,12 @@ class UserController extends Controller
             }
     
             if (is_null($request->sources) && is_null($request->categories) && is_null($request->authors)) {
-                return response()->json(['message' => 'Please add sources, categories, or authors to add preferences.'], 500);
+                return response()->json(['message' => 'Please add sources, categories, or authors to add preferences.'], 400);
             }
     
             $preferences = $this->preferenceRepository->updateOrCreatePreference($request);
             if ($preferences) {
                 return response()->json(['message' => 'Preferences updated successfully']);
-            } else {
-                return response()->json(['message' => 'Failed to update preferences'], 500);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -59,9 +57,9 @@ class UserController extends Controller
     
             $preferences = $this->preferenceRepository->getPreferences($user->id);
             return response()->json([
-                'sources' => $preferences ? $preferences->sources : [],
-                'categories' => $preferences ? $preferences->categories : [],
-                'authors' => $preferences ? $preferences->authors : [],
+                'sources' => $preferences ? json_decode($preferences->sources) : [],
+                'categories' => $preferences ? json_decode($preferences->categories) : [],
+                'authors' => $preferences ? json_decode($preferences->authors) : [],
             ]);
         } catch (Exception $e) {
             return response()->json([

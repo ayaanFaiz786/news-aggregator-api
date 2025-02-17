@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\userInterface;
+use App\Interfaces\UserInterface;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     private $userRepository;
 
-    public function __construct(userInterface $userRepository)
+    public function __construct(UserInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -62,7 +62,7 @@ class AuthController extends Controller
                 return response()->json($validator->errors(), 422);
             }
     
-            $user = $this->userRepository->getUserByEmail($request->emai);
+            $user = $this->userRepository->getUserByEmail($request->email);
     
             if (!$user || !Hash::check($request->password, $user->password)) {
                 throw ValidationException::withMessages([

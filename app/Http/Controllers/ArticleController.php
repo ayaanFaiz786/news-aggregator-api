@@ -33,6 +33,12 @@ class ArticleController extends Controller
     {
         try {
             $article = $this->articleRepository->getArticleById($id);
+
+            if (!$article) {
+                return response()->json([
+                    'error' => 'Article not found',
+                ], 404);
+            }
             return response()->json($article);
         } catch (Exception $e) {
             return response()->json([

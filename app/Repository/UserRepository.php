@@ -9,11 +9,11 @@ class UserRepository implements UserInterface
 {
     public function createUser($data)
     {
-        User::create($data);
+        return User::create($data);
     }
 
     public function getUserByEmail($email)
     {
-        User::where('email', $email)->first();
+        return User::where('email', $email)->first();
     }
 }
