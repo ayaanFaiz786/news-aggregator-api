@@ -30,7 +30,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: news_aggregator_api
-      MYSQL_USER: root
+      MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
       - "3307:3306"
@@ -41,6 +41,8 @@ services:
       
   adminer: 
     image: adminer 
+    depends_on:
+      - db
     restart: always 
     ports: 
       - 8080:8080

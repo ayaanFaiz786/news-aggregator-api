@@ -8,12 +8,9 @@ use Exception;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
-{
-    private $articleRepository;
-    
-    public function __construct(ArticleInterface $articleRepository)
+{   
+    public function __construct(private ArticleInterface $articleRepository)
     {
-        $this->articleRepository = $articleRepository;
     }
 
     /**

@@ -9,11 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 class FetchArticlesFromNewsApi
 {
-    private $articleRepository;
-    
-    public function __construct(ArticleInterface $articleRepository)
+    public function __construct(private ArticleInterface $articleRepository)
     {
-        $this->articleRepository = $articleRepository;
     }
 
     public function fetchArticlesFromAPI()

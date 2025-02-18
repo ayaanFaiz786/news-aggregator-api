@@ -14,9 +14,15 @@ Ensure you have Docker and Docker Compose installed. If not, follow the instruct
 
 ### 2. Clone the repository:
 
+Run the below commands to clone repository and install dependencies
 ```bash
-  git clone https://github.com/your-username/news-aggregator-api.git
+git clone https://github.com/ayaanFaiz786/news-aggregator-api.git
+
 cd news-aggregator-api
+
+cp .env.example .env
+
+composer install
 ```
 
 ### 3. Build and run the Docker containers:
@@ -39,7 +45,9 @@ This will:
 ```
 
 ### 5. Access the application:
-The application will be running at http://localhost:81 inside the Docker container.
+Visit below link to access news aggregator api endpoints and documentation
+
+http://localhost:81/api/documentation
 
 To access database visit http://localhost:8080/
 and enter credentials to access the local database
@@ -50,5 +58,10 @@ and enter credentials to access the local database
 To stop the running container
 ```bash
 ./vendor/bin/sail stop
+```
+## Cron 
+To fetch news articles from mutiple news apis set up a cron or manually run the below command.
+```bash
+vendor/bin/sail artisan news-aggregator:fetch-articles
 ```
 

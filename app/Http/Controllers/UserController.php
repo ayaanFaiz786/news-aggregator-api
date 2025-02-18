@@ -10,11 +10,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    private $preferenceRepository;
-
-    public function __construct(UserPreferenceInterface $preferenceRepository)
+    public function __construct(private UserPreferenceInterface $preferenceRepository)
     {
-        $this->preferenceRepository = $preferenceRepository;
     }
 
     /**

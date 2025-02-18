@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:fetch-articles-command')->daily();
+        $schedule->command('news-aggregator:fetch-articles')->daily();
     }
 
     /**

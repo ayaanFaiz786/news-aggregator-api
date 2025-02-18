@@ -12,11 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    private $userRepository;
-
-    public function __construct(UserInterface $userRepository)
+    public function __construct(private UserInterface $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     /**
