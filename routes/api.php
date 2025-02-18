@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
+Route::middleware('throttle:api-login')->post('login', [AuthController::class, 'login']);
+Route::middleware('throttle:api-login')->post('register', [AuthController::class, 'register']);
 
-Route::group(['middleware' => ['auth:sanctum', 'XssSanitization']], function () {
+Route::group(['middleware' => ['throttle:api', 'auth:sanctum', 'XssSanitization']], function () {
     Route::get('/user', function (Request $request) {
         return response()->json($request->user());
     });

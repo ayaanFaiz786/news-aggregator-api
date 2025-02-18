@@ -1,7 +1,7 @@
 
 services:
   app:
-    image: php:8.1-fpm
+    build: ./
     container_name: news-aggregator-api
     volumes:
       - ./:/var/www
@@ -36,6 +36,14 @@ services:
       - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+    networks:
+      - laravel
+      
+  adminer: 
+    image: adminer 
+    restart: always 
+    ports: 
+      - 8080:8080
     networks:
       - laravel
 

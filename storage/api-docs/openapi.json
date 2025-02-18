@@ -59,11 +59,15 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
                     "message": {
                       "type": "string",
                       "example": "User registered successfully!"
                     },
-                    "user": {
+                    "data": {
                       "type": "object",
                       "properties": {
                         "name": {
@@ -81,7 +85,7 @@
               }
             }
           },
-          "400": {
+          "402": {
             "description": "Validation error",
             "content": {
               "application/json": {
@@ -113,9 +117,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -166,13 +170,22 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Login successful!"
                     },
-                    "token": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVkIjp0cnVlfQ"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "example": "Bearer <JWT_TOKEN>"
+                        }
+                      }
                     }
                   }
                 }
@@ -186,9 +199,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -222,6 +235,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Logged out successfully"
@@ -238,9 +255,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -328,34 +345,19 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "title": {
+                      "status": {
                         "type": "string",
-                        "example": "Example Article Title"
+                        "example": "success"
                       },
-                      "content": {
+                      "message": {
                         "type": "string",
-                        "example": "This is an example article content."
+                        "example": "Article list fetched successfully"
                       },
-                      "source": {
-                        "type": "string",
-                        "example": "Example sour."
-                      },
-                      "category": {
-                        "type": "string",
-                        "example": "Example category."
-                      },
-                      "author": {
-                        "type": "string",
-                        "example": "Test Author"
-                      },
-                      "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-02-18T12:00:00Z"
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Article"
+                        }
                       }
                     }
                   }
@@ -370,9 +372,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -420,34 +422,17 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "title": {
+                      "status": {
                         "type": "string",
-                        "example": "Example Article Title"
+                        "example": "success"
                       },
-                      "content": {
+                      "message": {
                         "type": "string",
-                        "example": "This is an example article content."
+                        "example": "Article fetched successfully"
                       },
-                      "source": {
-                        "type": "string",
-                        "example": "Example sour."
-                      },
-                      "category": {
-                        "type": "string",
-                        "example": "Example category."
-                      },
-                      "author": {
-                        "type": "string",
-                        "example": "Test Author"
-                      },
-                      "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-02-18T12:00:00Z"
+                      "data": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Article"
                       }
                     }
                   }
@@ -462,7 +447,11 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
                       "type": "string",
                       "example": "Article not found"
                     }
@@ -478,9 +467,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -516,34 +505,19 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "title": {
+                      "status": {
                         "type": "string",
-                        "example": "Example Article Title"
+                        "example": "success"
                       },
-                      "content": {
+                      "message": {
                         "type": "string",
-                        "example": "This is an example article content."
+                        "example": "Personalized feed fetched successfully"
                       },
-                      "source": {
-                        "type": "string",
-                        "example": "Example sour."
-                      },
-                      "category": {
-                        "type": "string",
-                        "example": "Example category."
-                      },
-                      "author": {
-                        "type": "string",
-                        "example": "Test Author"
-                      },
-                      "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-02-18T12:00:00Z"
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Article"
+                        }
                       }
                     }
                   }
@@ -558,6 +532,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Unauthenticated"
@@ -574,9 +552,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -610,34 +588,36 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "sources": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "source1",
-                        "source2"
-                      ]
+                    "status": {
+                      "type": "string",
+                      "example": "success"
                     },
-                    "categories": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "category"
-                      ]
+                    "message": {
+                      "type": "string",
+                      "example": "Preferences fetched successfully"
                     },
-                    "authors": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "author1",
-                        "author2"
-                      ]
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "categories": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "authors": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -651,6 +631,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Unauthenticated"
@@ -667,9 +651,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -742,6 +726,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Preferences updated successfully"
@@ -758,9 +746,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "status": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "error"
                     },
                     "message": {
                       "type": "string",
@@ -781,6 +769,51 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Example Article Title"
+          },
+          "content": {
+            "type": "string",
+            "example": "This is an example article content."
+          },
+          "source": {
+            "type": "string",
+             "example": "Example sour."
+          },
+          "category": {
+            "type": "string",
+            "example": "Example category."
+          },
+          "author": {
+            "type": "string",
+            "example": "Test Author"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-02-18"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "content",
+          "source",
+          "category",
+          "author",
+          "created_at"
+        ]
       }
     }
   }
