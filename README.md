@@ -65,3 +65,8 @@ To fetch news articles from mutiple news apis set up a cron or manually run the 
 vendor/bin/sail artisan news-aggregator:fetch-articles
 ```
 
+### Test Cases
+To run tests run the following command
+```bash
+vendor/bin/sail artisan test
+```

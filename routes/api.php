@@ -16,22 +16,22 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware('throttle:api-login')->post('login', [AuthController::class, 'login']);
-Route::middleware('throttle:api-login')->post('register', [AuthController::class, 'register']);
+Route::middleware('throttle:api-login')->post('login', [AuthController::class, 'login'])->name('login');
+Route::middleware('throttle:api-login')->post('register', [AuthController::class, 'register'])->name('register');
 
 Route::group(['middleware' => ['throttle:api', 'auth:sanctum', 'XssSanitization']], function () {
     Route::get('/user', function (Request $request) {
         return response()->json($request->user());
-    });
+    })->name('user');
 
-    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     
-    Route::get('articles', [ArticleController::class, 'index']);
-    Route::get('articles/{id}', [ArticleController::class, 'show']);
-    Route::get('personalized-feed', [ArticleController::class, 'personalizedFeed']);
+    Route::get('articles', [ArticleController::class, 'index'])->name('articles');
+    Route::get('articles/{id}', [ArticleController::class, 'show'])->name('article');
+    Route::get('personalized-feed', [ArticleController::class, 'personalizedFeed'])->name('personalized-feed');
     
-    Route::get('preferences', [UserController::class, 'getPreferences']);
-    Route::post('preferences', [UserController::class, 'setPreferences']);
+    Route::get('preferences', [UserController::class, 'getPreferences'])->name('preferences');
+    Route::post('preferences', [UserController::class, 'setPreferences'])->name('set-preferences');
 });
 
 
